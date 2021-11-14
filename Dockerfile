@@ -15,6 +15,7 @@ FROM node:17-alpine
 
 WORKDIR /usr/src
 
+COPY --from=build /usr/src/node-modules/ node-modules/
 COPY --from=build /usr/src/dist/ dist/
 
 ENTRYPOINT node ./dist/index.js
