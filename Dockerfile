@@ -10,4 +10,4 @@ COPY tsconfig.json babel.config.json ./
 
 RUN yarn build
 
-ENTRYPOINT node -e ts,js ./dist/index.js
+ENTRYPOINT node ./dist/index.js
