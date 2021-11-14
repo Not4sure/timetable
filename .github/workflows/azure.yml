@@ -26,7 +26,7 @@ jobs:
     runs-on: self-hosted
     environment: production
     steps:
-      - name: Build image
+      - name: Build image and restart containers
         run: |
           cd /home/not_sure/app
           sh pull-restart.sh univera-timetable
