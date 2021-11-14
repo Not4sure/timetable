@@ -11,7 +11,7 @@ COPY tsconfig.json babel.config.json ./
 RUN yarn build
 RUN ls dist/
 
-FROM BUILD
+FROM node:17-alpine
 
 WORKDIR /usr/src
 
