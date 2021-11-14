@@ -1,5 +1,5 @@
 import Division from './division'
-import Lesson, {Week, LessonType} from './lesson'
+import Lesson, {Repeat, LessonType} from './lesson'
 import Account from './account'
 import Subject from './subject'
 
@@ -11,6 +11,6 @@ export {
 }
 
 export {
-    Week,
+    Repeat,
     LessonType
 }

@@ -1,7 +1,7 @@
 import express from "express"
 import bodyParser from "body-parser"
 import {currentWeek} from "./utils";
-import {Subject, Account, Division, Lesson, Week, LessonType} from './models'
+import {Subject, Account, Division, Lesson, Repeat, LessonType} from './models'
 
 const app = express()
 const port = process.env.PORT
@@ -116,7 +116,7 @@ app.get('/', async (req, res) => {
         type: LessonType.Lecture,
         comment: 'Перенесем на стрим',
         link: 'google.com',
-        weeks: Week.Odd,
+        weeks: Repeat.Odd,
         number: 1,
         day: 1
     }).save()
