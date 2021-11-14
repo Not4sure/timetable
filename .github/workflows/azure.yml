@@ -23,7 +23,7 @@ on:
 jobs:
   build-and-deploy:
     name: Build and Deploy
-    runs-on: azure-runner
+    runs-on: Organization
     environment: production
     steps:
       - name: Build image and restart containers
