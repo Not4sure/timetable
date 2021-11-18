@@ -15,6 +15,7 @@ export function getSchema() {
         firstname: String,
         lastname: String,
         patronymic: String,
+        mail: String,
         division: {type: Schema.Types.ObjectId, ref: 'division'},
         phoneNumber: {
             type: String,
