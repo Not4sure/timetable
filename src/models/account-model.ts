@@ -14,6 +14,7 @@ function getSchema() {
             type: String,
             math: /^\+\d{10}$/,
         },
+        // todo: rm _id from response
         lecturerData: new Schema({
            position: String,
         }),

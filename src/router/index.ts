@@ -23,6 +23,7 @@ router.get('/division/:id', divisionController.getDivision)
 router.get('/divisions', divisionController.getAllDivisions)
 router.get('/subject/:id', subjectController.getSubject)
 router.get('/account/:id', authMiddleware, accountController.getAccount)
+router.post('/lecturer', authMiddleware, accountController.createAccount)
 // todo: remove
 router.use('*', (req: express.Request, res: express.Response, next: express.NextFunction) => next(new ApiError(400, 'Не туда')) )
 

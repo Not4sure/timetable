@@ -9,6 +9,11 @@ class AccountService {
         return account
     }
 
+    // todo: по-нормальому сделть
+    async create(data: any) {
+        return await (new Account(data)).save()
+    }
+
 }
 
 export default new AccountService()
