@@ -3,7 +3,7 @@ FROM node:17-alpine
 WORKDIR /usr/src
 
 COPY package.json  ./
-RUN yarn install
+RUN yarn install --production
 COPY ./src/ src/
 
 COPY tsconfig.json babel.config.json ./
