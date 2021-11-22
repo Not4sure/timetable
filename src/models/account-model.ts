@@ -15,7 +15,7 @@ function getSchema() {
             math: /^\+\d{10}$/,
         },
         lecturerData: new Schema({
-           degree: String,
+           position: String,
         }),
         telegramData: new Schema({
             id: Number,
