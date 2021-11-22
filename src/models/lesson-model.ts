@@ -1,29 +1,16 @@
-import mongoose from '../lib/initMongo'
-import {basename} from 'path'
+import {Schema, model} from 'mongoose'
 
-const Schema = mongoose.Schema
-const modelName = basename(__filename, '.js')
-const schema = getSchema()
-export default mongoose.model(modelName, schema)
+const modelName = 'lesson'
+export default model(modelName, getSchema())
 
-export enum LessonType {
-    Lecture = 'lecture',
-    Practice = 'practice',
-    Lab = 'lab',
+// todo: заменить нормально
+const timeLimits = {
+    start: ['8:00', '9:50', '11:40', '13:30', '15:20', '17:10'],
+    end: ['9:35', '11:25', '13:15', '15:05', '16:55', '18:45'],
 }
 
-export enum Repeat {
-    Odd = 'odd',
-    Even = 'even',
-    All = 'all',
-}
-
-/**
- * Model Schema definition
- * @returns {module:mongoose.Schema<Document, Model<any, any>, undefined>}
- */
-export function getSchema() {
-    return new Schema({
+function getSchema() {
+    const schema = new Schema({
         subject: {type: Schema.Types.ObjectId, ref: 'subject'},
         lecturers: [{type: Schema.Types.ObjectId, ref: 'account'}],
         divisions: [{type: Schema.Types.ObjectId, ref: 'division'}],
@@ -48,10 +35,15 @@ export function getSchema() {
             min: 1,
             max: 7
         },
-        //todo
-        begin: {
-            type: Date,
+    });
 
+    return schema.set('toJSON', {
+        virtuals: true,
+        versionKey: false,
+        transform: (doc, ret) => {
+            ret.start = timeLimits.start[doc.number - 1]
+            ret.end = timeLimits.end[doc.number - 1]
+            delete ret._id
         }
     });
 }

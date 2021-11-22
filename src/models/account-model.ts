@@ -1,17 +1,10 @@
-import mongoose from '../lib/initMongo'
-import {basename} from 'path'
+import {Schema, model} from 'mongoose'
 
-const Schema = mongoose.Schema
-const modelName = basename(__filename, '.js')
-const schema = getSchema()
-export default mongoose.model(modelName, schema)
+const modelName = 'account'
+export default model(modelName, getSchema())
 
-/**
- * Model Schema definition
- * @returns {module:mongoose.Schema<Document, Model<any, any>, undefined>}
- */
-export function getSchema() {
-    return new Schema({
+function getSchema() {
+    const schema = new Schema({
         firstname: String,
         lastname: String,
         patronymic: String,
@@ -31,5 +24,13 @@ export function getSchema() {
             username: String,
             photo_url: String,
         }),
+    });
+
+    return schema.set('toJSON', {
+        virtuals: true,
+        versionKey: false,
+        transform: (doc, ret) => {
+            delete ret._id
+        }
     });
 }
