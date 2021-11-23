@@ -1,4 +1,7 @@
 import Lesson from '../models/lesson-model'
+import Division from '../models/division-model'
+import Subject from '../models/subject-model'
+import Account from '../models/account-model'
 import ApiError from "../exceptions/api-error";
 
 class LessonService {
@@ -26,6 +29,60 @@ class LessonService {
         if (lessons.length == 0)
             throw ApiError.BadRequest(`No lessons for this division`)
         return lessons
+    }
+
+    // todo: rm
+    async createFromJSON(data: any) {
+        try {
+            for (const lesson of data) {
+                const dvs = await Division.find({name: lesson.divisions})
+                if (dvs.length == 0) continue;
+
+                let divisions: any = [];
+                for (const dv of dvs)
+                    divisions.push(dv._id)
+
+                let lecturers: any = [];
+                for (const l of lesson.lecturers) {
+                    let lecturer = await Account.findOne({
+                        lastname: l.lastname,
+                        firstname: { "$regex": l.n, "$options": "i" },
+                        patronymic: { "$regex": l.p, "$options": "i" },
+                    })
+                    if (!lecturer) {
+                        lecturer = new Account;
+                        lecturer.firstname = l.n;
+                        lecturer.patronymic = l.p;
+                        lecturer.lastname = l.lastname;
+                        lecturer = await lecturer.save();
+                        console.log('lol', lecturer)
+                    }
+                    lecturers.push(lecturer._id);
+                }
+
+                let subject = await Subject.findOne({name: lesson.subject})
+                if (!subject) {
+                    subject = new Subject;
+                    subject.name = lesson.subject;
+                    subject = await subject.save();
+                    console.log('lols', subject);
+                }
+
+                console.log(`subject ${subject._id} lecturers ${lecturers} divisions ${divisions}`)
+                const ls = new Lesson
+                ls.subject = subject._id
+                ls.lecturers = lecturers
+                ls.divisions = divisions
+                ls.repeat = lesson.weeks
+                ls.room = lesson.room
+                ls.type = lesson.type
+                ls.number = lesson.lesson_num
+                ls.day = lesson.day
+                await ls.save()
+            }
+        } catch (e: any) {
+            console.log(e.message)
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 import Division from '../models/division-model'
 import ApiError from "../exceptions/api-error";
+import Account from "../models/account-model";
 
 class DivisionService {
     async getById(id: string) {
@@ -14,6 +15,11 @@ class DivisionService {
         if (!divisions)
             throw ApiError.BadRequest(`Lol there's no divisions`)
         return divisions
+    }
+
+    // todo: по-нормальому сделть
+    async create(data: any) {
+        return await (new Division(data)).save()
     }
 
 }

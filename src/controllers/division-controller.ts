@@ -25,6 +25,20 @@ class DivisionController {
             next(e)
         }
     }
+
+    async createDivision (req: express.Request, res: express.Response, next: express.NextFunction) {
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty())
+                return next(ApiError.BadRequest('Ты - ошибка'))
+            const data = req.body.data
+            const id = await divisionService.create(data)
+            res.json(id)
+        } catch (e) {
+            next(e)
+        }
+    }
+
 }
 
 export default new DivisionController()
