@@ -10,9 +10,13 @@ function getSchema() {
         patronymic: String,
         mail: String,
         division: {type: Schema.Types.ObjectId, ref: 'division'},
+        accessGroups: [{
+            type: String,
+            enum: ['lecturer', 'admin', 'superadmin']
+        }],
         phoneNumber: {
             type: String,
-            math: /^\+\d{10}$/,
+            match: /^\+\d{10}$/,
         },
         // todo: rm _id from response
         lecturerData: new Schema({

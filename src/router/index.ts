@@ -19,12 +19,17 @@ const router = Router()
 router.get('/lesson/:id', lessonController.getLesson)
 router.get('/lessons/:divisionId', lessonController.getLessonsByDivision)
 router.get('/lessons/:divisionId/:week', lessonController.getLessonsByDivision)
+
+
 router.get('/division/:id', divisionController.getDivision)
 router.get('/divisions', divisionController.getAllDivisions)
+router.post('/division', authMiddleware, divisionController.createDivision)
+
+
 router.get('/subject/:id', subjectController.getSubject)
 router.get('/account/:id', authMiddleware, accountController.getAccount)
+
 router.post('/lecturer', authMiddleware, accountController.createAccount)
-router.post('/division', authMiddleware, divisionController.createDivision)
 router.post('/hui', authMiddleware, lessonController.JSON)
 // todo: remove
 router.use('*', (req: express.Request, res: express.Response, next: express.NextFunction) => next(new ApiError(400, 'Не туда')) )

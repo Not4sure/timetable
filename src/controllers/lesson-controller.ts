@@ -25,8 +25,8 @@ class LessonController {
                 return next(ApiError.BadRequest('Ты - ошибка'))
             const divisionId = req.params.divisionId
             const week = getWeekNumber(req.params.week)
-            const lesson = await lessonService.getByDivision(divisionId, week)
-            res.json(lesson)
+            const lessons = await lessonService.getByDivision(divisionId, week)
+            res.json({week: week, lessons: lessons})
         } catch (e) {
             next(e)
         }
