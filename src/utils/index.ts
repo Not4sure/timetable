@@ -1,6 +1,6 @@
 import moment from "moment";
 
-const firstDay = moment(process.env.FIRST_DAY ?? '01/09/2021', 'DD/MM/YYYY')
+const firstDay = moment(process.env.FIRST_DAY ?? '30/08/2021', 'DD/MM/YYYY')
 
 const currentWeek = () => moment().diff(firstDay, 'weeks') + 1
 

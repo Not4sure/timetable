@@ -27,7 +27,9 @@ router.post('/division', authMiddleware, divisionController.createDivision)
 
 
 router.get('/subject/:id', subjectController.getSubject)
+
 router.get('/account/:id', authMiddleware, accountController.getAccount)
+router.post('/login', accountController.login)
 
 router.post('/lecturer', authMiddleware, accountController.createAccount)
 router.post('/hui', authMiddleware, lessonController.JSON)

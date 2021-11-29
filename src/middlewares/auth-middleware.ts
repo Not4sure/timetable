@@ -1,19 +1,23 @@
 import ApiError from '../exceptions/api-error'
+import tokenService from '../services/token-service'
 import express from 'express';
-import {TelegramLogin} from 'node-telegram-login'
-
-const tgToken = process.env.TG_TOKEN ?? ''
-const tgLoginChecker = new TelegramLogin(tgToken)
 
 export default function (req: express.Request, res: express.Response, next: express.NextFunction) {
   try {
-    const userData = req.body.tgLogin
-    if(!userData)
+    const authorizationHeader = req.headers.authorization
+    if (!authorizationHeader)
       return next(ApiError.UnauthorizedError())
 
-    if(!tgLoginChecker.checkLoginData(userData))
+    const accessToken = authorizationHeader.split(' ')[1]
+    if (!accessToken)
       return next(ApiError.UnauthorizedError())
 
+
+    const userData = tokenService.validateAccessToken(accessToken)
+    if (!userData)
+      return next(ApiError.UnauthorizedError())
+
+    req.body.user = userData
     next()
   } catch (e) {
     return next(ApiError.UnauthorizedError())
