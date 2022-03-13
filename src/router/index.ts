@@ -19,6 +19,7 @@ const router = Router()
 router.get('/lesson/:id', lessonController.getLesson)
 router.get('/lessons/:divisionId', lessonController.getLessonsByDivision)
 router.get('/lessons/:divisionId/:week', lessonController.getLessonsByDivision)
+router.post('/lesson/:id', authMiddleware, lessonController.editLesson)
 
 
 router.get('/division/:id', divisionController.getDivision)

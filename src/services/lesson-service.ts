@@ -31,6 +31,15 @@ class LessonService {
         return lessons
     }
 
+    async edit(id, data) {
+        const lesson = await Lesson.findById(id).then()
+        if(!lesson)
+            throw ApiError.BadRequest('No such lesson')
+        await lesson.update(data).then()
+        
+        return lesson
+    }
+
     // todo: rm
     async createFromJSON(data: any) {
         try {

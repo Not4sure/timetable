@@ -32,6 +32,20 @@ class LessonController {
         }
     }
 
+    async editLesson(req: express.Request, res: express.Result, next: express.NextFunction) {
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty())
+                return next(ApiError.BadRequest('Ты - ошибка'))
+            const id = req.params.id
+            const data = req.body.data
+            const lesson = await lessonService.edit(id, data)
+            res.json(lesson)
+        } catch (e) {
+            next(e)
+        }
+    }
+
     async JSON(req: express.Request, res: express.Response, next: express.NextFunction) {
         try {
             const errors = validationResult(req)
