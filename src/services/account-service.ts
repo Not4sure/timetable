@@ -15,7 +15,7 @@ class AccountService {
     }
 
     async login(telegramId: string, telegramData: any) {
-        let account = await Account.findOne({ telegramData })
+        let account = await Account.findOne({ telegramData: {id: telegramId}})
         if(!account)
             account = await (new Account({ telegramData })).save()
         return account
