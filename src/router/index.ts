@@ -23,7 +23,7 @@ router.get('/lessons/:divisionId/:week', lessonController.getLessonsByDivision)
 
 router.get('/division/:id', divisionController.getDivision)
 router.get('/divisions', divisionController.getAllDivisions)
-router.post('/division', authMiddleware, divisionController.createDivision)
+router.post('/division', divisionController.createDivision)
 
 
 router.get('/subject/:id', subjectController.getSubject)
