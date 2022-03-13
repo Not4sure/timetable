@@ -3,6 +3,9 @@ import tokenService from '../services/token-service'
 import express from 'express';
 
 export default function (req: express.Request, res: express.Response, next: express.NextFunction) {
+
+  next()
+
   try {
     const authorizationHeader = req.headers.authorization
     if (!authorizationHeader)
