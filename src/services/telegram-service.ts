@@ -53,9 +53,7 @@ bot.on('text', async ctx => {
 
 bot.action(/deleteFromAdmins/, ctx => {
     console.log('deleteFromAdmins')
-    console.log(ctx)
-    console.log(ctx.message)
-
+    console.log(ctx.callbackQuery)
 })
 
 class TelegramService {
