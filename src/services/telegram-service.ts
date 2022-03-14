@@ -30,8 +30,12 @@ bot.start(ctx => {
     )
 })
 
-bot.on('callback_query', ctx => {
-    console.log('щось відбувається')
+bot.on('shipping_query', ctx => console.log('shipping_query'))
+
+bot.on('callback_query', ctx => console.log('callback_query'))
+
+bot.on('text', ctx => {
+    console.log('text', ctx.message)
 })
 
 class TelegramService {
