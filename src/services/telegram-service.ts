@@ -21,25 +21,23 @@ bot.use(async (ctx, next) => {
 bot.start(ctx => {
     ctx.reply(
         'Ти - суперадмін. З великою силою з\'являється велике прискорення!',
-        Markup.keyboard([
-            Markup.button.callback('Адміни', 'admins'),
-            Markup.button.callback('Суперадміни', 'superadmins'),
-            Markup.button.callback('Додати', 'addAdmin')
+        Markup.keyboard([[
+                Markup.button.callback('Адміни', 'admins'),
+                Markup.button.callback('Суперадміни', 'superadmins'),
+            ],
+            [Markup.button.callback('Додати', 'addAdmin', true)]
         ])
     )
 })
 
 bot.on('callback_query', ctx => {
-    ctx.answerCbQuery(ctx.callbackQuery.inline_message_id)
+    ctx.answerCbQuery()
 })
 
 class TelegramService {
     checkLoginData(data: TelegramLoginPayload) {
         return tgLoginChecker.checkLoginData(data)
     }
-
-
-
 }
 
 export const botCallback = bot.webhookCallback(`/${tgToken}`)
