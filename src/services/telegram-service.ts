@@ -54,7 +54,7 @@ bot.on('text', async ctx => {
 bot.action(/deleteFromAdmins/,async ctx => {
     const id = JSON.parse((ctx.callbackQuery as any).data).payload
     const account = await accountService.login(id)
-    account.accessGroups = account.accessGroups.filter((group: string) => group !== 'admins')
+    account.accessGroups = account.accessGroups.filter((group: string) => group !== 'admin')
     await account.save()
     ctx.reply('Одним адміном менше!')
 })
