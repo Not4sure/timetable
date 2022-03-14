@@ -52,7 +52,9 @@ bot.on('text', async ctx => {
 })
 
 bot.action(/deleteFromAdmins/, ctx => {
-    console.log('deleteFromAdmins', ctx.inlineMessageId)
+    console.log('deleteFromAdmins')
+    console.log(ctx.inlineQuery)
+    console.log(ctx.preCheckoutQuery)
 })
 
 class TelegramService {
