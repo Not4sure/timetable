@@ -34,7 +34,7 @@ router.post('/login', accountController.login)
 
 router.post('/lecturer', authMiddleware, accountController.createAccount)
 router.post('/hui', authMiddleware, lessonController.JSON)
-// todo: remove
-router.use('*', (req: express.Request, res: express.Response, next: express.NextFunction) => next(new ApiError(400, 'Не туда')) )
+// // todo: remove
+// router.use('*', (req: express.Request, res: express.Response, next: express.NextFunction) => next(new ApiError(400, 'Не туда')) )
 
 export default router

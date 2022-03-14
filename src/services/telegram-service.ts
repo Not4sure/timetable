@@ -8,7 +8,7 @@ const tgLoginChecker = new TelegramLogin(tgToken)
 const bot = new Telegraf(tgToken)
 bot.telegram.setWebhook(`https://api.timetable.univera.app/${tgToken}`).then( _ => console.log('Webhook set'))
 
-bot.command('start', (ctx) => {
+bot.start((ctx) => {
     ctx.reply('Поки що я нічого не вмію.')
 })
 
