@@ -37,7 +37,7 @@ bot.on('text', async ctx => {
                 ctx.reply(
                     `${account.telegramData.first_name} @${account.telegramData.username} ${account.division.name}`,
                     Markup.inlineKeyboard([
-                        Markup.button.callback('Зрада', JSON.stringify({a: "deleteFromAdmins", p: account.telegramData.id}))
+                        Markup.button.callback('Зрада', JSON.stringify({action: "deleteFromAdmins", payload: account.telegramData.id}))
                     ])
                 )
             break;
@@ -51,9 +51,12 @@ bot.on('text', async ctx => {
     }
 })
 
-bot.action(/deleteFromAdmins/, ctx => {
-    console.log('deleteFromAdmins')
-    console.log(ctx.callbackQuery)
+bot.action(/deleteFromAdmins/,async ctx => {
+    const id = JSON.parse((ctx.callbackQuery as any).data).payload
+    const account = await accountService.login(id)
+    account.accessGroups = account.accessGroups.filter((group: string) => group !== 'admins')
+    await account.save()
+    ctx.reply('Одним адміном менше!')
 })
 
 class TelegramService {
