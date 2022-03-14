@@ -25,13 +25,13 @@ bot.start(ctx => {
                 Markup.button.callback('Адміни', 'admins'),
                 Markup.button.callback('Суперадміни', 'superadmins'),
             ],
-            [Markup.button.callback('Додати', 'addAdmin', true)]
+            [Markup.button.callback('Додати', 'addAdmin')]
         ])
     )
 })
 
 bot.on('callback_query', ctx => {
-    ctx.answerCbQuery()
+    console.log('щось відбувається')
 })
 
 class TelegramService {
