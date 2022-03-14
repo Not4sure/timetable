@@ -36,7 +36,9 @@ bot.on('text', async ctx => {
             for(const account of await accountService.getByAccessGroup('admin'))
                 ctx.reply(
                     `${account.telegramData.first_name} @${account.telegramData.username} ${account.division.name}`,
-                    Markup.inlineKeyboard([Markup.button.callback('Зрада', 'deleteFromAdmins')])
+                    Markup.inlineKeyboard([
+                        Markup.button.callback('Зрада', JSON.stringify({a: "deleteFromAdmins", p: account.telegramData.id}))
+                    ])
                 )
             break;
         case 'Суперадміни':
@@ -49,12 +51,8 @@ bot.on('text', async ctx => {
     }
 })
 
-bot.action('deleteFromAdmins', ctx => {
-    console.log('deleteFromAdmins')
-})
-
-bot.action('admins', ctx => {
-    console.log('admins')
+bot.action(/deleteFromAdmins/, ctx => {
+    console.log('deleteFromAdmins', ctx.inlineMessageId)
 })
 
 class TelegramService {
