@@ -35,13 +35,13 @@ bot.on('text', async ctx => {
         case 'Адміни':
             for(const account of await accountService.getByAccessGroup('admin'))
                 ctx.reply(
-                    `${account.telegramData.first_name} @${account.telegramData.username}\n${account.division.name}`,
+                    `${account.telegramData.first_name} @${account.telegramData.username} ${account.division.name}`,
                     Markup.inlineKeyboard([Markup.button.callback('Зрада', 'deleteFromAdmins')])
                 )
             break;
         case 'Суперадміни':
             for(const account of await accountService.getByAccessGroup('superadmin'))
-                ctx.reply(`${account.telegramData.first_name} @${account.telegramData.username}\n${account.division.name}`)
+                ctx.reply(`${account.telegramData.first_name} @${account.telegramData.username} ${account.division.name}`)
             break;
         case 'Додати':
 
@@ -49,9 +49,12 @@ bot.on('text', async ctx => {
     }
 })
 
-bot.on('inline_query', ctx => {
-    console.log(ctx.inlineMessageId)
-    console.log(ctx.inlineQuery)
+bot.action('deleteFromAdmins', ctx => {
+    console.log('deleteFromAdmins')
+})
+
+bot.action('admins', ctx => {
+    console.log('admins')
 })
 
 class TelegramService {
