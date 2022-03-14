@@ -49,8 +49,8 @@ bot.on('text', async ctx => {
             ctx.reply('Скидай повідомлення нового адміна!')
             break;
         default:
-            console.log(ctx.from.username)
-            console.log(ctx.from.id)
+            console.log(ctx.senderChat)
+            console.log(ctx.message)
     }
 })
 
