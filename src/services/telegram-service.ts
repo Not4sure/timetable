@@ -40,10 +40,19 @@ bot.on('text', async ctx => {
                 )
             break;
         case 'Суперадміни':
+            for(const account of await accountService.getByAccessGroup('superadmin'))
+                ctx.reply(`${account.telegramData.first_name} @${account.telegramData.username}\n${account.division.name}`)
+            break;
         case 'Додати':
+
+            break;
     }
 })
 
+bot.on('inline_query', ctx => {
+    console.log(ctx.inlineMessageId)
+    console.log(ctx.inlineQuery)
+})
 
 class TelegramService {
     checkLoginData(data: TelegramLoginPayload) {
