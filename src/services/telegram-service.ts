@@ -21,6 +21,6 @@ class TelegramService {
 
 }
 
-export const botCallback = bot.webhookCallback(tgToken)
+export const botCallback = bot.webhookCallback(`/${tgToken}`)
 
 export default new TelegramService()

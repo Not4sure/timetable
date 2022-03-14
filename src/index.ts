@@ -18,7 +18,7 @@ app.use(
 )
 app.use(router)
 app.use(botCallback)
-// todo: починить при отсутствии ошибки
+
 app.use(errorMiddleware)
 
 const start = async () => {
