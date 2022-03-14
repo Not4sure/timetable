@@ -33,7 +33,7 @@ bot.start(ctx => {
 bot.on('text', async ctx => {
     switch (ctx.message.text) {
         case 'Адміни':
-            for(const account of await accountService.getByAccessGroup('admins'))
+            for(const account of await accountService.getByAccessGroup('admin'))
                 ctx.reply(
                     `${account.telegramData.first_name} @${account.telegramData.username}\n<b>${account.division.name}</b>`,
                     Markup.inlineKeyboard([Markup.button.callback('Зрада', 'deleteFromAdmins')])

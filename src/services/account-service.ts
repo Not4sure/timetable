@@ -16,7 +16,6 @@ class AccountService {
 
     async getByAccessGroup(accessGroup: string) {
         let accounts = await Account.find({accessGroup: accessGroup}).then()
-        console.log(accounts)
         return accounts
     }
 
