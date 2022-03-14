@@ -14,6 +14,10 @@ class AccountService {
         return await (new Account(data)).save()
     }
 
+    async getByAccessGroup(accessGroup: string) {
+        return await Account.find({accessGroup: accessGroup}).then()
+    }
+
     async login(telegramId: number, telegramData: any) {
         let account = await Account.findOne({ 'telegramData.id': telegramId }).then()
         if(!account)

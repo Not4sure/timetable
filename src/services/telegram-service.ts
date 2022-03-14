@@ -30,13 +30,20 @@ bot.start(ctx => {
     )
 })
 
-bot.on('shipping_query', ctx => console.log('shipping_query'))
-
-bot.on('callback_query', ctx => console.log('callback_query'))
-
-bot.on('text', ctx => {
-    console.log('text', ctx.message)
+bot.on('text', async ctx => {
+    switch (ctx.message.text) {
+        case 'Адміни':
+            for(const account of await accountService.getByAccessGroup('admins'))
+                ctx.reply(
+                    `${account.telegramData.first_name} @${account.telegramData.username}\n<b>${account.division.name}</b>`,
+                    Markup.inlineKeyboard([Markup.button.callback('Зрада', 'deleteFromAdmins')])
+                )
+            break;
+        case 'Суперадміни':
+        case 'Додати':
+    }
 })
+
 
 class TelegramService {
     checkLoginData(data: TelegramLoginPayload) {
