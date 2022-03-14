@@ -49,7 +49,7 @@ bot.on('text', async ctx => {
             ctx.reply('Скидай повідомлення нового адміна!')
             break;
         default:
-            console.log(ctx.senderChat)
+            console.log(ctx.updateType)
             console.log(ctx.message)
     }
 })
