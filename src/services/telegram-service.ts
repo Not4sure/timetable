@@ -46,8 +46,11 @@ bot.on('text', async ctx => {
                 ctx.reply(`${account.telegramData.first_name} @${account.telegramData.username} ${account.division.name}`)
             break;
         case 'Додати':
-
+            ctx.reply('Скидай повідомлення нового адміна!')
             break;
+        default:
+            console.log(ctx.from.username)
+            console.log(ctx.from.id)
     }
 })
 
