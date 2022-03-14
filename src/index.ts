@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import router from './router'
 import errorMiddleware from './middlewares/error-middleware'
+import {botCallback} from "./services/telegram-service";
 
 const PORT = process.env.PORT || 4000
 const app = express()
@@ -16,6 +17,7 @@ app.use(
     }),
 )
 app.use(router)
+app.use(botCallback)
 // todo: починить при отсутствии ошибки
 app.use(errorMiddleware)
 
