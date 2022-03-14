@@ -1,6 +1,6 @@
 import ApiError from '../exceptions/api-error'
 import { TelegramLogin, TelegramLoginPayload } from 'node-telegram-login'
-import {Context, Telegraf} from 'telegraf'
+import {Context, Markup, Telegraf} from 'telegraf'
 import accountService from "./account-service";
 
 const tgToken = process.env.TG_TOKEN ?? ''
@@ -19,7 +19,18 @@ bot.use(async (ctx, next) => {
 })
 
 bot.start(ctx => {
-    ctx.reply('Ща функціонал дохуяримо, ага. Та й таке...')
+    ctx.reply(
+        'Ти - суперадмін. З великою силою з\'являється велике прискорення!',
+        Markup.keyboard([
+            Markup.button.callback('Адміни', 'admins'),
+            Markup.button.callback('Суперадміни', 'superadmins'),
+            Markup.button.callback('Додати', 'addAdmin')
+        ])
+    )
+})
+
+bot.on('callback_query', ctx => {
+    ctx.answerCbQuery(ctx.callbackQuery.inline_message_id)
 })
 
 class TelegramService {
