@@ -2,6 +2,7 @@ import ApiError from '../exceptions/api-error'
 import { TelegramLogin, TelegramLoginPayload } from 'node-telegram-login'
 import {Context, Markup, Telegraf} from 'telegraf'
 import accountService from "./account-service";
+import {login} from "telegraf/typings/button";
 
 const tgToken = process.env.TG_TOKEN ?? ''
 const tgLoginChecker = new TelegramLogin(tgToken)
@@ -49,8 +50,13 @@ bot.on('text', async ctx => {
             ctx.reply('Скидай повідомлення нового адміна!')
             break;
         default:
-            console.log(ctx.updateType)
-            console.log(ctx.message)
+            if(!ctx.message.forward_from)
+                ctx.reply('Я хз що з цим робити, в нього аккаунт скритий!')
+            else {
+                const acc = await accountService.login(ctx.message.forward_from.id, ctx.message.forward_from)
+                acc.accessGroups.append('admin')
+                await acc.save()
+            }
     }
 })
 
