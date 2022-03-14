@@ -31,7 +31,7 @@ class LessonService {
         return lessons
     }
 
-    async edit(id, data) {
+    async edit(id: string, data: any) {
         const lesson = await Lesson.findById(id).then()
         if(!lesson)
             throw ApiError.BadRequest('No such lesson')

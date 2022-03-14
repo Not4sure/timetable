@@ -15,8 +15,9 @@ class AccountService {
     }
 
     async getByAccessGroup(accessGroup: string) {
-        let accounts = await Account.find({accessGroups: accessGroup}).then()
-        return accounts
+        return await Account.find({accessGroups: accessGroup})
+            .populate('telegramData')
+            .then()
     }
 
     async login(telegramId: number, telegramData: any) {

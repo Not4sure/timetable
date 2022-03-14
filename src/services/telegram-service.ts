@@ -35,7 +35,7 @@ bot.on('text', async ctx => {
         case 'Адміни':
             for(const account of await accountService.getByAccessGroup('admin'))
                 ctx.reply(
-                    `${account.telegramData.first_name} @${account.telegramData.username}\n<b>${account.division.name}</b>`,
+                    `${account.telegramData.first_name} @${account.telegramData.username}\n${account.division.name}`,
                     Markup.inlineKeyboard([Markup.button.callback('Зрада', 'deleteFromAdmins')])
                 )
             break;
