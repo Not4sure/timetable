@@ -17,6 +17,7 @@ class AccountService {
     async getByAccessGroup(accessGroup: string) {
         return await Account.find({accessGroups: accessGroup})
             .populate('telegramData')
+            .populate('division')
             .then()
     }
 
