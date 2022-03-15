@@ -16,5 +16,6 @@
         "target": "es2017"
     },
 
-    "include": ["src"]
+    "include": ["src"],
+    "exclude": ["src/bot"]
 }
