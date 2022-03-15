@@ -18,10 +18,10 @@ bot.use(isSuperAdmin)
 bot.use(stage.middleware())
 
 async function getUserInfo(ctx, next) {
-    console.log('ctx.session', ctx.session)
-    if(!ctx.session.accessGroups) {
+    if(!ctx.session.accountId) {
         const account = await accountService.login(ctx.from.id, ctx.from)
         ctx.session.accessGroups = account.accessGroups
+        ctx.session.accountId = account.id
     }
     await next()
 }
@@ -34,8 +34,9 @@ async function isSuperAdmin(ctx, next) {
 }
 
 bot.start(ctx => ctx.scene.enter('start'))
-bot.hears('superAdminsList', ctx => console.log('superAdminsList'))
+bot.hears('Адміни', ctx => console.log('Суперадміни'))
 bot.hears('Суперадміни', ctx => console.log('Суперадміни'))
+bot.hears('Додати', ctx => console.log('Суперадміни'))
 
 bot.on('text', async ctx => {
     switch (ctx.message.text) {

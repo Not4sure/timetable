@@ -1,0 +1,23 @@
+import {Markup, Scenes} from 'telegraf'
+import {getMainKeyboard} from "../utils";
+
+const addAdmin = new Scenes.BaseScene('start')
+
+addAdmin.enter(async ctx => {
+    await ctx.reply(
+        'Скинь мені повідомлення від нового адміна',
+        Markup.keyboard([Markup.button.callback('Повернутися', 'back')])
+    )
+})
+
+addAdmin.leave(async ctx => {
+    await ctx.reply('',
+        getMainKeyboard(ctx.session.accessGroups)
+    )
+})
+
+addAdmin.hears('Повернутися', ctx => ctx.scene.leave())
+
+addAdmin.on('text', ctx => ctx.scene.leave())
+
+export default addAdmin
