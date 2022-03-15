@@ -1,6 +1,7 @@
 import {Markup, session, Telegraf, Scenes} from 'telegraf'
 import accountService from '../services/account-service'
 import startScene from './scenes/start'
+import LocalSession from 'telegraf-session-local'
 
 const tgToken = process.env.TG_TOKEN ?? ''
 
@@ -11,7 +12,7 @@ const stage = new Scenes.Stage([
     startScene,
 ])
 
-bot.use(session())
+bot.use((new LocalSession({storage: LocalSession.storageMemory})))
 bot.use(getUserInfo)
 bot.use(isSuperAdmin)
 bot.use(stage.middleware())
