@@ -17,6 +17,7 @@ bot.use(isSuperAdmin)
 bot.use(stage.middleware())
 
 async function getUserInfo(ctx, next) {
+    console.log('ctx.session', ctx.session)
     if(!ctx.session?.accessGroups) {
         const account = await accountService.login(ctx.from.id, ctx.from)
         ctx.session.accessGroups = account.accessGroups
