@@ -1,5 +1,4 @@
 import {Context, Markup, Scenes} from 'telegraf'
-import {BaseScene} from "telegraf/typings/scenes";
 
 const start = new Scenes.BaseScene('start')
 
