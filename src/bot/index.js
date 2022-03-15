@@ -1,4 +1,4 @@
-import {Markup, session, Telegraf, Scenes} from 'telegraf'
+import {Markup, Telegraf, Scenes} from 'telegraf'
 import accountService from '../services/account-service'
 import startScene from './scenes/start'
 import LocalSession from 'telegraf-session-local'
@@ -19,7 +19,7 @@ bot.use(stage.middleware())
 
 async function getUserInfo(ctx, next) {
     console.log('ctx.session', ctx.session)
-    if(!ctx.session?.accessGroups) {
+    if(!ctx.session.accessGroups) {
         const account = await accountService.login(ctx.from.id, ctx.from)
         ctx.session.accessGroups = account.accessGroups
     }
@@ -34,7 +34,8 @@ async function isSuperAdmin(ctx, next) {
 }
 
 bot.start(ctx => ctx.scene.enter('start'))
-
+bot.hears('superAdminsList', ctx => console.log('superAdminsList'))
+bot.hears('Суперадміни', ctx => console.log('Суперадміни'))
 
 bot.on('text', async ctx => {
     switch (ctx.message.text) {

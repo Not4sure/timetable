@@ -10,8 +10,8 @@ start.leave(ctx => {
     ctx.reply(
         'Ти - суперадмін. З великою силою з\'являється велике прискорення!',
         Markup.keyboard([[
-            Markup.button.callback('Адміни', 'admins'),
-            Markup.button.callback('Суперадміни', 'superadmins'),
+            Markup.button.callback('Адміни', 'adminsList'),
+            Markup.button.callback('Суперадміни', 'superAdminsList'),
         ],
             [Markup.button.callback('Додати', 'addAdmin')]
         ])
