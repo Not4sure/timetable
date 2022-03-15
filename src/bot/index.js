@@ -42,22 +42,6 @@ bot.hears('Додати', ctx => ctx.scene.enter('addAdmin'))
 
 bot.on('text', async ctx => {
     switch (ctx.message.text) {
-        case 'Адміни':
-            for(const account of await accountService.getByAccessGroup('admin'))
-                ctx.reply(
-                    `${account.telegramData.first_name} @${account.telegramData.username} ${account?.division.name}`,
-                    Markup.inlineKeyboard([
-                        Markup.button.callback('Зрада', JSON.stringify({action: "deleteFromAdmins", payload: account.telegramData.id}))
-                    ])
-                )
-            break;
-        case 'Суперадміни':
-            for(const account of await accountService.getByAccessGroup('superadmin'))
-                ctx.reply(`${account.telegramData.first_name} @${account.telegramData.username} ${account.division.name}`)
-            break;
-        case 'Додати':
-            ctx.reply('Скидай повідомлення нового адміна!')
-            break;
         default:
             if(ctx.message.forward_from_name)
                 ctx.reply('Я хз що з цим робити, в нього аккаунт скритий!')

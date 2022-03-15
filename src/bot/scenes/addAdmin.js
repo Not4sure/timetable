@@ -1,7 +1,7 @@
 import {Markup, Scenes} from 'telegraf'
 import {getMainKeyboard} from "../utils";
 
-const addAdmin = new Scenes.BaseScene('start')
+const addAdmin = new Scenes.BaseScene('addAdmin')
 
 addAdmin.enter(async ctx => {
     await ctx.reply(
