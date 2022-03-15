@@ -54,7 +54,7 @@ bot.on('text', async ctx => {
                 ctx.reply('Я хз що з цим робити, в нього аккаунт скритий!')
             else {
                 const acc = await accountService.login(ctx.message.forward_from.id, ctx.message.forward_from)
-                acc.accessGroups.append('admin')
+                acc.accessGroups.push('admin')
                 await acc.save()
             }
     }
