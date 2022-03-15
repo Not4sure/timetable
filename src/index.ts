@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import router from './router'
 import errorMiddleware from './middlewares/error-middleware'
-import {botCallback} from "./services/telegram-service";
+import {botCallback} from './bot'
 
 const PORT = process.env.PORT || 4000
 const app = express()
@@ -33,4 +33,4 @@ const start = async () => {
     }
 }
 
-start()
+start().then( _ => console.log('App started!'))
