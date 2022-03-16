@@ -20,7 +20,7 @@ start.leave(ctx => {
 })
 
 start.on('text', async ctx => {
-    const division = await divisionService.getByName(message.text)
+    const division = await divisionService.getByName(ctx.message.text)
 
     if(!division)
         return ctx.reply('Такої групи немає')
@@ -28,7 +28,7 @@ start.on('text', async ctx => {
     const account = await accountService.get(ctx.session.accountId)
     account.division = division
     await account.save()
-    ctx.scene.leave()
+    await ctx.scene.leave()
 })
 
 export default start
