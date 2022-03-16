@@ -28,5 +28,5 @@ export function getMainKeyboard(accessGroups) {
 }
 
 export function randomJoke() {
-    return jokes[Math.abs(Math.random() * jokes.length)]
+    return jokes[Math.floor(Math.random() * jokes.length)]
 }
