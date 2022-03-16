@@ -1,7 +1,7 @@
 import {Context, Markup, Scenes} from 'telegraf'
 import accountService from "../../services/account-service";
 
-const admins = new Scenes.BaseScene('start')
+const admins = new Scenes.BaseScene('admins')
 
 admins.enter(async ctx => {
     for(const account of await accountService.getByAccessGroup('admin'))

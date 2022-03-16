@@ -2,6 +2,7 @@ import {Markup, Telegraf, Scenes} from 'telegraf'
 import accountService from '../services/account-service'
 import startScene from './scenes/start'
 import addAdmin from './scenes/addAdmin'
+import admins from './scenes/admins'
 import LocalSession from 'telegraf-session-local'
 
 const tgToken = process.env.TG_TOKEN ?? ''
@@ -11,7 +12,8 @@ bot.telegram.setWebhook(`https://api.timetable.univera.app/${tgToken}`).then( _ 
 
 const stage = new Scenes.Stage([
     startScene,
-    addAdmin
+    addAdmin,
+    admins
 ])
 
 bot.use((new LocalSession({storage: LocalSession.storageMemory})))
@@ -36,8 +38,8 @@ async function isSuperAdmin(ctx, next) {
 }
 
 bot.start(ctx => ctx.scene.enter('start'))
-bot.hears('Адміни', ctx => console.log('Суперадміни'))
-bot.hears('Суперадміни', ctx => console.log('Суперадміни'))
+bot.hears('Адміни', ctx => ctx.scene.enter('admins'))
+bot.hears('Суперадміни', ctx => ctx.reply('А хуй, мене харило писати цю частину'))
 bot.hears('Додати', ctx => ctx.scene.enter('addAdmin'))
 
 bot.on('text', async ctx => {
