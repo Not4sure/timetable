@@ -17,6 +17,8 @@ addAdmin.leave(async ctx => {
 
 addAdmin.hears('Повернутися', ctx => ctx.scene.leave())
 
-addAdmin.on('text', ctx => ctx.scene.leave())
+addAdmin.on('text', ctx => {
+    console.log(ctx.message)
+})
 
 export default addAdmin

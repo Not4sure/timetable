@@ -5,24 +5,13 @@ const admins = new Scenes.BaseScene('admins')
 
 admins.enter(async ctx => {
     for(const account of await accountService.getByAccessGroup('admin'))
-        ctx.reply(
+        await ctx.reply(
             `${account.telegramData.first_name} @${account.telegramData.username} ${account?.division?.name ?? 'Відраховано' }`,
             Markup.inlineKeyboard([
                 Markup.button.callback('Зрада', JSON.stringify({action: "deleteFromAdmins", payload: account.telegramData.id}))
             ])
         )
-})
-
-admins.leave(ctx => {
-    ctx.reply(
-        'Ти - суперадмін. З великою силою з\'являється велике прискорення!',
-        Markup.keyboard([[
-            Markup.button.callback('Адміни', 'adminsList'),
-            Markup.button.callback('Суперадміни', 'superAdminsList'),
-        ],
-            [Markup.button.callback('Додати', 'addAdmin')]
-        ])
-    )
+    ctx.scene.leave()
 })
 
 admins.on('text', ctx => ctx.scene.leave())
