@@ -10,6 +10,10 @@ class DivisionService {
         return division
     }
 
+    async getByName(name: string) {
+        return await Division.findOne({name}).then()
+    }
+
     async getAll() {
         const divisions = await Division.find()
         if (!divisions)

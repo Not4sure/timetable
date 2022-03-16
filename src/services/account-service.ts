@@ -1,5 +1,6 @@
 import Account from '../models/account-model'
 import ApiError from '../exceptions/api-error'
+import {Schema} from "mongoose";
 
 class AccountService {
     async get(id: string) {
@@ -12,6 +13,11 @@ class AccountService {
     // todo: по-нормальому сделть
     async create(data: any) {
         return await (new Account(data)).save()
+    }
+
+    async setDivision(account: any, divisionId: string) {
+        account.division = divisionId
+        await account.save()
     }
 
     async getByAccessGroup(accessGroup: string) {
