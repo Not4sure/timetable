@@ -33,7 +33,7 @@ addAdmin.on('text',async ctx => {
     if (!ctx.session.quiz?.forward_from)
         return ctx.reply('Спочатку перешли повідомлення')
 
-    const division = divisionService.getByName(message.text)
+    const division = await divisionService.getByName(message.text)
 
     if(!division)
         return ctx.reply('Такої групи немає')
