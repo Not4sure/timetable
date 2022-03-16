@@ -57,7 +57,6 @@ bot.on('text', async ctx => {
 
 bot.action(/deleteFromAdmins/,async ctx => {
     const id = JSON.parse(ctx.callbackQuery.data).payload
-    console.log(id)
     const account = await accountService.login(id)
     account.accessGroups = account.accessGroups.filter(group => group !== 'admin')
     await account.save()

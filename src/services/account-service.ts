@@ -25,11 +25,7 @@ class AccountService {
         let account = await Account.findOne({ 'telegramData.id': telegramId }).then()
         if(!account)
             return await (new Account({ telegramData })).save()
-        if(telegramData){
-            account.telegramData = telegramData
-            await account.save()
-            return account
-        }
+        return account
     }
 
 }
