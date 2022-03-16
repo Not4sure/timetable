@@ -11,9 +11,8 @@ addAdmin.enter(async ctx => {
 })
 
 addAdmin.leave(async ctx => {
-    await ctx.reply('',
-        getMainKeyboard(ctx.session.accessGroups)
-    )
+    await ctx.reply('Тут має бути рандомний жарт',
+        getMainKeyboard(ctx.session.accessGroups))
 })
 
 addAdmin.hears('Повернутися', ctx => ctx.scene.leave())
