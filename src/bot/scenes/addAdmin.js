@@ -38,7 +38,7 @@ addAdmin.on('text',async ctx => {
     if(!division)
         return ctx.reply('Такої групи немає')
 
-    const account = await accountService.login(ctx.session.quiz.forward_from.id)
+    const account = await accountService.login(ctx.session.quiz.forward_from.id, ctx.session.quiz.forward_from)
     account.division = division
     account.accessGroups.push('admin')
     await account.save()
