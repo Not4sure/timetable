@@ -1,5 +1,5 @@
 import {Markup} from "telegraf";
-import jokes from './jokes.json'
+import jokes from 'jokes.json'
 
 const userButtnos = [
     ['Сьогодні', 'Завтра'],
