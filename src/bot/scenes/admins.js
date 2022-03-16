@@ -6,7 +6,7 @@ const admins = new Scenes.BaseScene('admins')
 admins.enter(async ctx => {
     for(const account of await accountService.getByAccessGroup('admin'))
         ctx.reply(
-            `${account.telegramData.first_name} @${account.telegramData.username} ${account?.division.name}`,
+            `${account.telegramData.first_name} @${account.telegramData.username} ${account?.division?.name ?? 'Відраховано' }`,
             Markup.inlineKeyboard([
                 Markup.button.callback('Зрада', JSON.stringify({action: "deleteFromAdmins", payload: account.telegramData.id}))
             ])
