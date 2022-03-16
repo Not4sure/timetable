@@ -15,7 +15,7 @@ class DivisionService {
     }
 
     async getAll() {
-        const divisions = await Division.find()
+        const divisions = await Division.find().then()
         if (!divisions)
             throw ApiError.BadRequest(`Lol there's no divisions`)
         return divisions
