@@ -1,5 +1,5 @@
 import {Markup, Scenes} from 'telegraf'
-import {getMainKeyboard} from '../utils'
+import {getMainKeyboard, randomJoke} from '../utils'
 import divisionService from "../../services/division-service";
 import accountService from "../../services/account-service";
 
@@ -14,8 +14,7 @@ addAdmin.enter(async ctx => {
 
 addAdmin.leave(async ctx => {
     delete ctx.session.quiz
-    await ctx.reply('Тут має бути рандомний жарт',
-        getMainKeyboard(ctx.session.accessGroups))
+    await ctx.reply(randomJoke(), getMainKeyboard(ctx.session.accessGroups))
 })
 
 addAdmin.hears('Повернутися', ctx => ctx.scene.leave())
