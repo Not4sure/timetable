@@ -8,7 +8,7 @@ const addAdmin = new Scenes.BaseScene('addAdmin')
 addAdmin.enter(async ctx => {
     await ctx.reply(
         'Скинь мені повідомлення від нового адміна',
-        Markup.keyboard([Markup.button.callback('Повернутися', 'back')])
+        Markup.keyboard(['Повернутися']).resize()
     )
 })
 

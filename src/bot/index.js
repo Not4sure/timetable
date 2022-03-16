@@ -18,7 +18,7 @@ const stage = new Scenes.Stage([
 
 bot.use((new LocalSession({storage: LocalSession.storageMemory})))
 bot.use(getUserInfo)
-bot.use(isSuperAdmin)
+// bot.use(isSuperAdmin)
 bot.use(stage.middleware())
 
 async function getUserInfo(ctx, next) {
@@ -38,9 +38,9 @@ async function isSuperAdmin(ctx, next) {
 }
 
 bot.start(ctx => ctx.scene.enter('start'))
-bot.hears('Адміни', ctx => ctx.scene.enter('admins'))
-bot.hears('Суперадміни', ctx => ctx.reply('А хуй, мене харило писати цю частину'))
-bot.hears('Додати', ctx => ctx.scene.enter('addAdmin'))
+bot.hears('Адміни', isSuperAdmin, ctx => ctx.scene.enter('admins'))
+bot.hears('Суперадміни', isSuperAdmin, ctx => ctx.reply('А хуй, мене харило писати цю частину'))
+bot.hears('Додати адміна', isSuperAdmin, ctx => ctx.scene.enter('addAdmin'))
 
 bot.action(/deleteFromAdmins/,async ctx => {
     const id = JSON.parse(ctx.callbackQuery.data).payload
