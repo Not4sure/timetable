@@ -42,19 +42,6 @@ bot.hears('Адміни', ctx => ctx.scene.enter('admins'))
 bot.hears('Суперадміни', ctx => ctx.reply('А хуй, мене харило писати цю частину'))
 bot.hears('Додати', ctx => ctx.scene.enter('addAdmin'))
 
-bot.on('text', async ctx => {
-    switch (ctx.message.text) {
-        default:
-            if(ctx.message.forward_from_name)
-                ctx.reply('Я хз що з цим робити, в нього аккаунт скритий!')
-            else {
-                const acc = await accountService.login(ctx.message.forward_from.id, ctx.message.forward_from)
-                acc.accessGroups.push('admin')
-                await acc.save()
-            }
-    }
-})
-
 bot.action(/deleteFromAdmins/,async ctx => {
     const id = JSON.parse(ctx.callbackQuery.data).payload
     const account = await accountService.login(id)
