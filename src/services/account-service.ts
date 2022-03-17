@@ -15,11 +15,6 @@ class AccountService {
         return await (new Account(data)).save()
     }
 
-    async setDivision(account: any, divisionId: string) {
-        account.division = divisionId
-        await account.save()
-    }
-
     async getByAccessGroup(accessGroup: string) {
         return await Account.find({accessGroups: accessGroup})
             .populate('telegramData')

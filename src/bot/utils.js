@@ -1,12 +1,17 @@
 import {Markup} from "telegraf";
+import lessonService from "../services/lesson-service";
+import {getWeekAndDay} from "../utils";
+import divisionService from "../services/division-service";
+import moment from "moment";
+import "moment/locale/uk";
+
 const jokes = [
     "Ріжемо русню!",
     "Русский военный корабль, иди нахуй!",
-    "Цього бота тестував Віктор Кім",
     "Сьогодні Годовиченко провів 0 пар",
     "Де ж той блядський десант",
     "Слава Україні!",
-    "Кажи, де зараз Степан Бендера?"
+    "Кажи, де зараз Степан Бендера"
 ]
 
 const userButtnos = [
@@ -29,4 +34,23 @@ export function getMainKeyboard(accessGroups) {
 
 export function randomJoke() {
     return jokes[Math.floor(Math.random() * jokes.length)]
+}
+
+export async function getLessons(divisionId, date) {
+    const divisionName = await divisionService.getById(divisionId)
+    const data = getWeekAndDay(date)
+    const lessons = lessonService.getByDivision(divisionId, data.week, data.day)
+
+    date.locale('uk')
+    return `Сьогодні ${date.format('dddd')}`
+
+    if(lessons.length === 0) {
+        return `Сьогодні ${date.format('dddd')}`
+    }
+
+    const result = `Розклад `
+    for(const lesson in lessons) {
+
+    }
+
 }

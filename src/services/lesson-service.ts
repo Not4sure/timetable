@@ -17,17 +17,15 @@ class LessonService {
         return lesson
     }
 
-    async getByDivision(divisionId: string, week?: number) {
+    async getByDivision(divisionId: string, week?: number, day?: number) {
         const repeat = week ? (week % 2 ? ['odd', 'all'] : ['even', 'all']) : ['odd', 'even', 'all']
         console.log(repeat, divisionId)
         const lessons = await Lesson
-            .find({divisions: divisionId, repeat: repeat})
+            .find({divisions: divisionId, repeat: repeat, day})
             .populate('subject')
             .populate('lecturers')
             .populate('divisions')
             .then()
-        if (lessons.length == 0)
-            throw ApiError.BadRequest(`No lessons for this division`)
         return lessons
     }
 

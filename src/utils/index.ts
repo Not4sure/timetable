@@ -4,6 +4,12 @@ const firstDay = moment(process.env.FIRST_DAY ?? '30/08/2021', 'DD/MM/YYYY')
 
 const currentWeek = () => moment().diff(firstDay, 'weeks') + 1
 
+function getWeekAndDay(date: moment.Moment) {
+    const week = date.diff(firstDay, 'weeks') + 1
+    const day = date.diff(firstDay, 'days') % 7 + 1
+    return {week, day}
+}
+
 function getWeekNumber(weekInp: string) {
     let week: number
     switch (weekInp) {
@@ -22,5 +28,6 @@ function getWeekNumber(weekInp: string) {
 
 export {
     getWeekNumber,
-    currentWeek
+    currentWeek,
+    getWeekAndDay
 }

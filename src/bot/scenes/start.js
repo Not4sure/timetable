@@ -5,6 +5,10 @@ import accountService from "../../services/account-service";
 
 const start = new Scenes.BaseScene('start')
 
+start.leave(ctx => {
+    ctx.reply(randomJoke(), getMainKeyboard(ctx.session.accessGroups))
+})
+
 start.enter(async ctx => {
     if(ctx.session.division) {
         await ctx.reply(`Привіт, ${ctx.from.first_name}`)
@@ -13,10 +17,6 @@ start.enter(async ctx => {
 
     await ctx.reply('Привіт! Для початку, обери свою группу.',
         Markup.keyboard((await divisionService.getAll()).map(group => group.name), {columns: 3}))
-})
-
-start.leave(ctx => {
-    ctx.reply(randomJoke(), getMainKeyboard(ctx.session.accessGroups))
 })
 
 start.on('text', async ctx => {

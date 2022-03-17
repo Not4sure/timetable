@@ -26,13 +26,15 @@ class LessonController {
             const divisionId = req.params.divisionId
             const week = getWeekNumber(req.params.week)
             const lessons = await lessonService.getByDivision(divisionId, week)
+            if (lessons.length == 0)
+                throw ApiError.BadRequest(`No lessons for this division`)
             res.json({week: week, lessons: lessons})
         } catch (e) {
             next(e)
         }
     }
 
-    async editLesson(req: express.Request, res: express.Result, next: express.NextFunction) {
+    async editLesson(req: express.Request, res: express.Response, next: express.NextFunction) {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty())
