@@ -1,6 +1,5 @@
 import Account from '../models/account-model'
 import ApiError from '../exceptions/api-error'
-import {Schema} from "mongoose";
 
 class AccountService {
     async get(id: string) {
