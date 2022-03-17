@@ -4,7 +4,7 @@ import startScene from './scenes/start'
 import addAdmin from './scenes/addAdmin'
 import admins from './scenes/admins'
 import LocalSession from 'telegraf-session-local'
-import {getLessons} from "./utils";
+import {getLessons, getMainKeyboard} from "./utils";
 import moment from "moment";
 
 const tgToken = process.env.TG_TOKEN ?? ''
@@ -40,7 +40,7 @@ async function isSuperAdmin(ctx, next) {
         await next()
 }
 
-bot.start(ctx => ctx.scene.enter('start'))
+bot.start(ctx => !ctx.session.division ? ctx.scene.enter('start') : ctx.reply(`Привіт, ${ctx.from.first_name}`, getMainKeyboard(ctx.session.accessGroups)))
 bot.hears('Адміни', isSuperAdmin, ctx => ctx.scene.enter('admins'))
 bot.hears('Суперадміни', isSuperAdmin, ctx => ctx.reply('А хуй, мене харило писати цю частину'))
 bot.hears('Додати адміна', isSuperAdmin, ctx => ctx.scene.enter('addAdmin'))

@@ -10,11 +10,6 @@ start.leave(ctx => {
 })
 
 start.enter(async ctx => {
-    if(ctx.session.division) {
-        await ctx.reply(`Привіт, ${ctx.from.first_name}`)
-        return await ctx.scene.leave()
-    }
-
     await ctx.reply('Привіт! Для початку, обери свою группу.',
         Markup.keyboard((await divisionService.getAll()).map(group => group.name), {columns: 3}))
 })
