@@ -28,8 +28,8 @@ async function getUserInfo(ctx, next) {
         const account = await accountService.login(ctx.from.id, ctx.from)
         ctx.session.accessGroups = account.accessGroups
         ctx.session.accountId = account.id
-        ctx.session.division = account.division
-        console.log('account.division', account.division)
+        ctx.session.division = account.division._id
+        console.log('account.division', account.division._id)
     }
     await next()
 }
