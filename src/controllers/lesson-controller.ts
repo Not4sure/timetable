@@ -26,7 +26,7 @@ class LessonController {
             const divisionId = req.params.divisionId
             const week = getWeekNumber(req.params.week)
             const lessons = await lessonService.getByDivision(divisionId, week)
-            if (lessons.length == 0)
+            if (!lessons)
                 throw ApiError.BadRequest(`No lessons for this division`)
             res.json({week: week, lessons: lessons})
         } catch (e) {
