@@ -19,7 +19,7 @@ const stage = new Scenes.Stage([
 ])
 
 bot.use((new LocalSession({storage: LocalSession.storageMemory})))
-bot.use(getUserInfo)
+// bot.use(getUserInfo)
 // bot.use(isSuperAdmin)
 bot.use(stage.middleware())
 

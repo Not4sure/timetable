@@ -8,6 +8,8 @@ class DivisionController {
         try {
             const id = req.params.id
             const division = await divisionService.getById(id)
+            if (!division)
+                throw ApiError.BadRequest(`No division with such id`)
             res.json(division)
         } catch (e) {
             next(e)
