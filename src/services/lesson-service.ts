@@ -3,6 +3,10 @@ import Division from '../models/division-model'
 import Subject from '../models/subject-model'
 import Account from '../models/account-model'
 import ApiError from "../exceptions/api-error";
+import moment from "moment";
+import {getWeekAndDay} from "../utils";
+
+const getRepeats = (week?: number) => week ? (week % 2 ? ['odd', 'all'] : ['even', 'all']) : ['odd', 'even', 'all']
 
 class LessonService {
     async getById(id: string) {
@@ -17,12 +21,26 @@ class LessonService {
         return lesson
     }
 
-    async getByDivision(divisionId: string, week?: number, day?: number) {
-        const repeat = week ? (week % 2 ? ['odd', 'all'] : ['even', 'all']) : ['odd', 'even', 'all']
-        console.log(repeat, divisionId, day)
+    async getByDivision(divisionId: string, week?: number) {
+        const repeat = getRepeats(week)
+        console.log(repeat, divisionId)
 
         const lessons = await Lesson
             .find({divisions: divisionId, repeat: repeat})
+            .populate('subject')
+            .populate('lecturers')
+            .populate('divisions')
+            .then()
+        return lessons
+    }
+
+    async getByDate(divisionId: string, date: moment.Moment) {
+        const {week, day} = getWeekAndDay(date)
+        const repeat = getRepeats(week)
+        console.log(repeat, day, divisionId)
+
+        const lessons = await Lesson
+            .find({divisions: divisionId, repeat, day})
             .populate('subject')
             .populate('lecturers')
             .populate('divisions')
