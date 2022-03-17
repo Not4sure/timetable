@@ -19,9 +19,10 @@ class LessonService {
 
     async getByDivision(divisionId: string, week?: number, day?: number) {
         const repeat = week ? (week % 2 ? ['odd', 'all'] : ['even', 'all']) : ['odd', 'even', 'all']
-        console.log(repeat, divisionId)
+        console.log(repeat, divisionId, day)
+
         const lessons = await Lesson
-            .find({divisions: divisionId, repeat: repeat, day: day ?? null })
+            .find({divisions: divisionId, repeat: repeat})
             .populate('subject')
             .populate('lecturers')
             .populate('divisions')
