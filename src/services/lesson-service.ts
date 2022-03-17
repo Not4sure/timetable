@@ -21,7 +21,7 @@ class LessonService {
         const repeat = week ? (week % 2 ? ['odd', 'all'] : ['even', 'all']) : ['odd', 'even', 'all']
         console.log(repeat, divisionId)
         const lessons = await Lesson
-            .find({divisions: divisionId, repeat: repeat, day})
+            .find({divisions: divisionId, repeat: repeat, day: day ?? null })
             .populate('subject')
             .populate('lecturers')
             .populate('divisions')
