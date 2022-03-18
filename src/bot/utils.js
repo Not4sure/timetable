@@ -29,7 +29,6 @@ export function getMainKeyboard(accessGroups) {
             buttons.push(...adminButtons)
         if(accessGroups.includes('superadmin'))
             buttons.push(...superAdminButtons)
-
     }
 
     return Markup.keyboard(buttons).resize()
