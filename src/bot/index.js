@@ -28,7 +28,7 @@ async function getUserInfo(ctx, next) {
         const account = await accountService.login(ctx.from.id, ctx.from)
         ctx.session.accessGroups = account.accessGroups
         ctx.session.accountId = account.id
-        ctx.session.division = account.division ?? null
+        ctx.session.division = account.division
     }
     await next()
 }
@@ -40,8 +40,8 @@ async function isSuperAdmin(ctx, next) {
         await next()
 }
 
-bot.start(ctx => ctx.reply(`Привіт, ${ctx.from.first_name}, ${ctx.session.division}`, getMainKeyboard(ctx.session.accessGroups)))
-// bot.start(ctx => !ctx.session.division ? ctx.scene.enter('start') : ctx.reply(`Привіт, ${ctx.from.first_name}`, getMainKeyboard(ctx.session.accessGroups)))
+// bot.start(ctx => ctx.reply(`Привіт, ${ctx.from.first_name}, ${ctx.session.division}`, getMainKeyboard(ctx.session.accessGroups)))
+bot.start(ctx => !ctx.session.division ? ctx.scene.enter('start') : ctx.reply(`Привіт, ${ctx.from.first_name}`, getMainKeyboard(ctx.session.accessGroups)))
 bot.hears('Адміни', isSuperAdmin, ctx => ctx.scene.enter('admins'))
 bot.hears('Суперадміни', isSuperAdmin, ctx => ctx.reply('А хуй, мене харило писати цю частину'))
 bot.hears('Додати адміна', isSuperAdmin, ctx => ctx.scene.enter('addAdmin'))
