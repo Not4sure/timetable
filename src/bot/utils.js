@@ -24,10 +24,13 @@ const superAdminButtons = [
 
 export function getMainKeyboard(accessGroups) {
     const buttons = [...userButtnos]
-    if(accessGroups.includes('admin'))
-        buttons.push(...adminButtons)
-    if(accessGroups.includes('superadmin'))
-        buttons.push(...superAdminButtons)
+    if(accessGroups) {
+        if(accessGroups.includes('admin'))
+            buttons.push(...adminButtons)
+        if(accessGroups.includes('superadmin'))
+            buttons.push(...superAdminButtons)
+
+    }
 
     return Markup.keyboard(buttons).resize()
 }
