@@ -39,14 +39,14 @@ export function randomJoke() {
 
 export async function getLessons(divisionId, date) {
     const divisionName = (await divisionService.getById(divisionId))?.name
-    const lessons = lessonService.getByDate(divisionId, date)
+    const lessons = await lessonService.getByDate(divisionId, date)
 
     date.locale('uk')
     let result = `Розклад ${divisionName}. ${_.capitalize(date.format('dddd D MMMM'))}`
 
     for(const lesson in lessons) {
-        result.concat(`\n\n${lesson.start} - ${lesson.end}\n`)
-        result.concat(`${lesson.subject}\n\n`)
+        result += `\n\n${lesson.start} - ${lesson.end}\n`
+        result += `${lesson.subject}\n\n`
     }
     return result
 }
