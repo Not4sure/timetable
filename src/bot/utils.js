@@ -47,7 +47,7 @@ export async function getLessons(divisionId, date) {
     for(let lesson of lessons) {
         lesson = lesson.toObject()
         result += `\n**${lesson.start} - ${lesson.end}**\n`
-        result += `[${lesson.subject.name}](${lesson.link})\n`
+        result += `[${lesson.subject.name}](${lesson.link.replace('.', '\.')})\n`
         for (const l of lesson.lecturers)
             result += `${l.firstname} ${l.lastname}\n`
 
