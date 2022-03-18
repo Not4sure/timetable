@@ -42,12 +42,11 @@ export async function getLessons(divisionId, date) {
     const lessons = lessonService.getByDate(divisionId, date)
 
     date.locale('uk')
-    return `Розклад ${divisionName}. ${_.capitalize(date.format('dddd D MMMM'))}`
+    let result = `Розклад ${divisionName}. ${_.capitalize(date.format('dddd D MMMM'))}`
 
-
-    const result = `Розклад `
     for(const lesson in lessons) {
-
+        result.concat(`\n\n${lesson.start} - ${lesson.end}\n`)
+        result.concat(`${lesson.subject}\n\n`)
     }
 
 }
