@@ -1,9 +1,8 @@
 import {Markup} from "telegraf";
-import lessonService from "../services/lesson-service";
-import {getWeekAndDay} from "../utils";
-import divisionService from "../services/division-service";
-import moment from "moment";
 import "moment/locale/uk";
+import _ from 'lodash'
+import lessonService from "../services/lesson-service";
+import divisionService from "../services/division-service";
 
 const jokes = [
     "Ріжемо русню!",
@@ -43,11 +42,8 @@ export async function getLessons(divisionId, date) {
     const lessons = lessonService.getByDate(divisionId, date)
 
     date.locale('uk')
-    return `Сьогодні ${date.format('dddd')}`
+    return `Розклад ${divisionName}. ${_.capitalize(date.format('dddd D MMMM'))}`
 
-    if(lessons.length === 0) {
-        return `Сьогодні ${date.format('dddd')}`
-    }
 
     const result = `Розклад `
     for(const lesson in lessons) {
