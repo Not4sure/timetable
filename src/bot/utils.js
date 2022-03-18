@@ -50,7 +50,7 @@ export async function getLessons(divisionId, date) {
         result += `[${lesson.subject.name}](${lesson.link})\n`
         for (const l of lesson.lecturers)
             result += `${l.firstname} ${l.lastname}\n`
-
     }
-    return result.replace('.', '\.')
+
+    return result.replace('.', '\\.')
 }
