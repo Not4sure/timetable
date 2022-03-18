@@ -48,5 +48,5 @@ export async function getLessons(divisionId, date) {
         result.concat(`\n\n${lesson.start} - ${lesson.end}\n`)
         result.concat(`${lesson.subject}\n\n`)
     }
-
+    return result
 }
