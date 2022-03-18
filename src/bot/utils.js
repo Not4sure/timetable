@@ -42,8 +42,8 @@ export async function getLessons(divisionId, date) {
     const lessons = await lessonService.getByDate(divisionId, date)
 
     date.locale('uk')
-    return 'Тест  ' +
-        '**жырный**' +
+    return 'Тест  \n' +
+        '**жырный** \n' +
         '[линка](https://music.youtube.com/watch?v=kQvrY0Mtv4E&feature=share)'
 
     let result = `Розклад ${divisionName}. ${_.capitalize(date.format('dddd D MMMM'))}\n`
