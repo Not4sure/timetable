@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose'
+import {Schema, model, Document} from 'mongoose'
 
 const modelName = 'lesson'
 export default model(modelName, getSchema())
@@ -37,13 +37,18 @@ function getSchema() {
         },
     });
 
-    return schema.set('toJSON', {
+    const params = {
         virtuals: true,
         versionKey: false,
-        transform: (doc, ret) => {
+        transform: (doc: any, ret: any) => {
             ret.start = timeLimits.start[doc.number - 1]
             ret.end = timeLimits.end[doc.number - 1]
             delete ret._id
         }
-    });
+    }
+
+    schema.set('toJSON', params)
+    schema.set('toObject', params)
+
+    return schema
 }

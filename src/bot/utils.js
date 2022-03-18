@@ -46,7 +46,7 @@ export async function getLessons(divisionId, date) {
 
     for(const lesson of lessons) {
         result += `\n\n${lesson.start} - ${lesson.end}\n`
-        result += `${lesson.subject}`
+        result += `${lesson.subject.name}`
     }
     return result
 }
