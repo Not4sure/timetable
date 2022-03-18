@@ -40,7 +40,7 @@ async function isSuperAdmin(ctx, next) {
         await next()
 }
 
-bot.start(ctx => ctx.reply('hello'))
+bot.start(ctx => ctx.reply(`Привіт, ${ctx.from.first_name}, ${ctx.session.division}`, getMainKeyboard(ctx.session.accessGroups)))
 // bot.start(ctx => !ctx.session.division ? ctx.scene.enter('start') : ctx.reply(`Привіт, ${ctx.from.first_name}`, getMainKeyboard(ctx.session.accessGroups)))
 bot.hears('Адміни', isSuperAdmin, ctx => ctx.scene.enter('admins'))
 bot.hears('Суперадміни', isSuperAdmin, ctx => ctx.reply('А хуй, мене харило писати цю частину'))
