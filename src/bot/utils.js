@@ -39,11 +39,12 @@ export function randomJoke() {
 }
 
 export async function getLessons(divisionId, date) {
+    return 'test'
+
     const divisionName = (await divisionService.getById(divisionId))?.name
     const lessons = lessonService.getByDate(divisionId, date)
 
     date.locale('uk')
-    return 'test'
     return `Сьогодні ${date.format('dddd')}`
 
     if(lessons.length === 0) {
