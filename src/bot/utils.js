@@ -39,8 +39,6 @@ export function randomJoke() {
 }
 
 export async function getLessons(divisionId, date) {
-    return 'test'
-
     const divisionName = (await divisionService.getById(divisionId))?.name
     const lessons = lessonService.getByDate(divisionId, date)
 
