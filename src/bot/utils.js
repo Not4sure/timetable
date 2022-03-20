@@ -42,19 +42,16 @@ export async function getLessons(divisionId, date) {
     const lessons = await lessonService.getByDate(divisionId, date)
 
     date.locale('uk')
-    return 'Тест  \n' +
-        '<b>жырный</b> \n' +
-        '<a href="https://music.youtube.com/watch?v=kQvrY0Mtv4E&feature=share">test</a>'
 
     let result = `Розклад ${divisionName}. ${_.capitalize(date.format('dddd D MMMM'))}\n`
 
     for(let lesson of lessons) {
         lesson = lesson.toObject()
-        result += `\n**${lesson.start} - ${lesson.end}**\n`
-        result += `[${lesson.subject.name}](${lesson.link})\n`
+        result += `\n<b>${lesson.start} - ${lesson.end}</b>>\n`
+        result += `<a href="${lesson.link}">${lesson.subject.name}</a>\n`
         for (const l of lesson.lecturers)
             result += `${l.firstname} ${l.lastname}\n`
     }
 
-    return result.replace('.', '\.')
+    return result
 }
