@@ -43,11 +43,11 @@ export async function getLessons(divisionId, date) {
 
     date.locale('uk')
 
-    let result = `Розклад ${divisionName}. ${_.capitalize(date.format('dddd D MMMM'))}\n`
+    let result = `Розклад ${divisionName}. ${_.capitalize(date.format('dddd, D MMMM'))}\n`
 
     for(let lesson of lessons) {
         lesson = lesson.toObject()
-        result += `\n<b>${lesson.start} - ${lesson.end}</b>>\n`
+        result += `\n<b>${lesson.start} - ${lesson.end}</b>\n`
         result += `<a href="${lesson.link}">${lesson.subject.name}</a>\n`
         for (const l of lesson.lecturers)
             result += `${l.firstname} ${l.lastname}\n`
