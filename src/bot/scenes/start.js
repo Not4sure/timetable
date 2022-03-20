@@ -22,6 +22,7 @@ start.on('text', async ctx => {
 
     const account = await accountService.get(ctx.session.accountId)
     account.division = division
+    ctx.session.division = division._id
     await account.save()
     await ctx.scene.leave()
 })
