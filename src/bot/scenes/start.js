@@ -10,7 +10,7 @@ start.leave(ctx => {
 })
 
 start.enter(async ctx => {
-    await ctx.reply('Привіт! Для початку, обери свою группу.',
+    await ctx.reply('Обери свою группу.',
         Markup.keyboard((await divisionService.getAll()).map(group => group.name), {columns: 3}))
 })
 
