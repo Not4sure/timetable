@@ -43,8 +43,8 @@ export async function getLessons(divisionId, date) {
 
     date.locale('uk')
     return 'Тест  \n' +
-        '<b>жырный</b>> \n' +
-        '[линка](https://music.youtube.com/watch?v=kQvrY0Mtv4E&feature=share)'
+        '<b>жырный</b> \n' +
+        '<a href="https://music.youtube.com/watch?v=kQvrY0Mtv4E&feature=share">test</a>'
 
     let result = `Розклад ${divisionName}. ${_.capitalize(date.format('dddd D MMMM'))}\n`
 
