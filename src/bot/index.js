@@ -12,7 +12,8 @@ const tgToken = process.env.TG_TOKEN ?? ''
 const bot = new Telegraf(tgToken)
 bot.telegram.setWebhook(`https://api.timetable.univera.app/${tgToken}`).then( _ => console.log('Webhook set'))
 
-const parseParams = { parse_mode: "MarkdownV2" }
+const parseParams = { parse_mode: "HTML" }
+// const parseParams = { parse_mode: "MarkdownV2" }
 
 const stage = new Scenes.Stage([
     startScene,
