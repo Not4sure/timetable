@@ -23,7 +23,6 @@ const stage = new Scenes.Stage([
 
 bot.use((new LocalSession({storage: LocalSession.storageMemory})))
 bot.use(getUserInfo)
-// bot.use(isSuperAdmin)
 bot.use(stage.middleware())
 
 async function getUserInfo(ctx, next) {
@@ -44,6 +43,7 @@ async function isSuperAdmin(ctx, next) {
 }
 
 bot.start(ctx => !ctx.session.division ? ctx.scene.enter('start') : ctx.reply(`Привіт, ${ctx.from.first_name}`, getMainKeyboard(ctx.session.accessGroups)))
+bot.command('changeGroup', ctx => ctx.scene.enter('start'))
 bot.hears('Адміни', isSuperAdmin, ctx => ctx.scene.enter('admins'))
 bot.hears('Суперадміни', isSuperAdmin, ctx => ctx.reply('А хуй, мене харило писати цю частину'))
 bot.hears('Додати адміна', isSuperAdmin, ctx => ctx.scene.enter('addAdmin'))
