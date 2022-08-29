@@ -18,8 +18,9 @@ app.use(
 )
 app.use(router)
 app.use(botCallback)
+app.use(express.static('public'))
 
-app.use(errorMiddleware)
+// app.use(errorMiddleware)
 
 const start = async () => {
     try {

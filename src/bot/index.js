@@ -8,9 +8,10 @@ import {getLessons, getMainKeyboard} from "./utils";
 import moment from "moment";
 
 const tgToken = process.env.TG_TOKEN ?? ''
+const origin = process.env.ORIGIN ?? 'timetable.diialovesyou.com'
 
 const bot = new Telegraf(tgToken)
-bot.telegram.setWebhook(`https://api.timetable.univera.app/${tgToken}`).then( _ => console.log('Webhook set'))
+bot.telegram.setWebhook(`https://${origin}/${tgToken}`).then( _ => console.log('Webhook set'))
 
 const parseParams = { parse_mode: "HTML" }
 // const parseParams = { parse_mode: "MarkdownV2" }
