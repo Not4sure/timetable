@@ -35,6 +35,12 @@ function getSchema() {
             min: 1,
             max: 7
         },
+        week: {
+            type: Number,
+            min: 0,
+            max: 16,
+            default: 0
+        }
     });
 
     const params = {

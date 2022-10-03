@@ -6,7 +6,12 @@ import ApiError from "../exceptions/api-error";
 import moment from "moment";
 import {getWeekAndDay} from "../utils";
 
-const getRepeats = (week?: number) => week ? (week % 2 ? ['odd', 'all'] : ['even', 'all']) : ['odd', 'even', 'all']
+const getRepeats = (week?: number) => {
+    const repeats = week ? (week % 2 ? ['odd'] : ['even']) : ['odd', 'even']
+    repeats.push('all')
+    repeats.push('none')
+    return repeats
+}
 
 class LessonService {
     async getById(id: string) {
@@ -26,7 +31,7 @@ class LessonService {
         console.log(repeat, divisionId)
 
         const lessons = await Lesson
-            .find({divisions: divisionId, repeat: repeat})
+            .find({divisions: divisionId, repeat: repeat, week: [0, null, undefined, week]})
             .populate('subject')
             .populate('lecturers')
             .populate('divisions')
@@ -99,11 +104,13 @@ class LessonService {
                 ls.subject = subject._id
                 ls.lecturers = lecturers
                 ls.divisions = divisions
-                ls.repeat = lesson.weeks
+                ls.repeat = lesson.repeat
+                ls.week = lesson.week
                 ls.room = lesson.room
                 ls.type = lesson.type
                 ls.number = lesson.lesson_num
                 ls.day = lesson.day
+                ls.link = lesson.link
                 await ls.save()
             }
         } catch (e: any) {
